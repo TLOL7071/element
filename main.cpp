@@ -5,21 +5,21 @@
 int main() {
     FactoryManager& manager = FactoryManager::getInstance();
 
-    // ´´½¨²úÆ·A²¢Ö¸¶¨¼ÓÈÈ²ßÂÔ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·Aï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½È²ï¿½ï¿½ï¿½
     Product* productA = manager.createProduct("ProductA");
     if (productA) {
         manager.assignStrategy(productA->get,"Heating",productA);
         productA->process();
     }
 
-    // ´´½¨²úÆ·B²¢Ö¸¶¨ÀäÈ´²ßÂÔ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·Bï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½È´ï¿½ï¿½ï¿½ï¿½
     Product* productB = manager.createProduct("ProductB");
     if (productB) {
         manager.assignStrategy(productB->get, "Cooling",productB);
         productB->process();
     }
-
-    // ´´½¨²úÆ·C²¢Ö¸¶¨»ìºÏ²ßÂÔ
+    std::cout<<"olololol";
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·Cï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ï²ï¿½ï¿½ï¿½
     Product* productC = manager.createProduct("ProductC");
     if (productC) {
         manager.assignStrategy(productC->get, "Mixing",productC);
