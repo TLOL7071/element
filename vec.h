@@ -201,19 +201,35 @@ type & Vector<type>:: operator[](int i)
         return this->p[i];
     }
 template<typename type>             //��+���أ�ʵ��vec1+vec2����vec3�����и�Ԫ��Ϊ��Ӻ���
-Vector<type> & Vector<type>:: operator+(const Vector<type>& vec)
+Vector<type> & Vector<type>:: operator+(const Vector<type>& vec) throw(int)
     {
-        if(this->capacity<vec.size)
-        {
-            this->capacity=vec.capacity;
-            type *tempt=new type[this->capacity]();
-            for(int i=0;i<this->size;i++)
-            {
-                tempt[i]=this->p[i];
-            }
-            delete []this->p;
-            p=tempt;
-            this->size=vec.size;
+        // if(this->capacity<vec.size)
+        // {
+        //     this->capacity=vec.capacity;
+        //     type *tempt=new type[this->capacity]();
+        //     for(int i=0;i<this->size;i++)
+        //     {
+        //         tempt[i]=this->p[i];
+        //     }
+        //     delete []this->p;
+        //     p=tempt;
+        //     this->size=vec.size;
+        // }
+        // for(int i=0;i<vec.size;i++)
+        // {
+        //     this->p[i]+=vec.p[i];
+        // }
+        // return *this;
+
+        //this-size=(this->size>vec.size ? this->size:vec.size);
+        //this-capacity=(this->capacity>vec.capacity ? this->capacity:vec.capacity);
+
+        try{
+            if(this->size!=vec.size)
+                throw(1);
+        }
+        catch(int){
+            cout<<"cant add two vector with different size"<<std::endl;
         }
         for(int i=0;i<vec.size;i++)
         {
@@ -221,15 +237,13 @@ Vector<type> & Vector<type>:: operator+(const Vector<type>& vec)
         }
         return *this;
 
-        //this-size=(this->size>vec.size ? this->size:vec.size);
-        //this-capacity=(this->capacity>vec.capacity ? this->capacity:vec.capacity);
 
     }
 template<typename type>                     //�Ժ�׺�����++���أ�ʵ�ַ���++ǰ�Ķ���֮���ٶԲ�������ȫ��Ԫ�ؼ�1
 Vector<type> & Vector<type>:: operator++(int)//��Ӽ�
     {
         static Vector<type> tp(*this);
-
+        static_assert(std::is_arithmetic<type>::value,"Vector element must be of arithmetic type" );
         for(int i=0;i<this->size;i++)
         {
             this->p[i]++;
